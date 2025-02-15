@@ -21,7 +21,7 @@ const Update = () => {
       try {
         setIsLoading(true)
 
-        await new Promise(r => setTimeout(r, 2000))
+        // await new Promise(r => setTimeout(r, 2000))
 
         // eq stands for equals similar to "where('id', id)"
         // single means return as an object, not in an array which is default
