@@ -48,6 +48,7 @@ const Create = () => {
 
       navigate('/')
     } catch (error) {
+      console.error(error)
     } finally {
       setIsLoading(true)
     }
