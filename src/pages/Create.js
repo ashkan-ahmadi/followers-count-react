@@ -3,7 +3,9 @@ import supabase from '../config/supabaseConfig'
 import { useNavigate } from 'react-router-dom'
 
 const Create = () => {
+  // https://reactrouter.com/6.29.0/hooks/use-navigate
   const navigate = useNavigate()
+
   const [title, setTitle] = useState('')
   const [method, setMethod] = useState('')
   const [rating, setRating] = useState('')
@@ -42,6 +44,7 @@ const Create = () => {
       <h2>Create</h2>
 
       <form onSubmit={handleSubmit}>
+        <label htmlFor="title">Title</label>
         <input
           type="text"
           id="title"
@@ -52,10 +55,11 @@ const Create = () => {
             setTitle(e.target.value)
           }}
         />
-
+        <label htmlFor="method">Method</label>
         <textarea name="method" id="method" value={method} onChange={e => setMethod(e.target.value)}></textarea>
 
-        <input type="number" id="rating" min="0" max="10" step="1" value={rating} onChange={e => setRating(e.target.value)} />
+        <label htmlFor="rating">Rating (0 to 10)</label>
+        <input type="number" id="rating" name="rating" min="0" max="10" step="1" value={rating} onChange={e => setRating(e.target.value)} />
 
         <button>Create</button>
 
