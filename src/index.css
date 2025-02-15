@@ -111,3 +111,9 @@ form button {
   font-family: "Poppins";
   cursor: pointer;
 }
+
+[disabled] {
+  background: lightgrey;
+  color: grey;
+  pointer-events: none;
+}
