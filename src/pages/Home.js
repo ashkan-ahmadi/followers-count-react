@@ -8,7 +8,7 @@ const Home = () => {
   const [smoothies, setSmoothies] = useState(null)
 
   useEffect(() => {
-    async function fetchSmoothes() {
+    async function fetchSmoothies() {
       // .select() means select all (like SELECT *)
       const { data, error } = await supabase.from('smoothies').select()
 
@@ -19,13 +19,12 @@ const Home = () => {
       }
 
       if (data) {
-        console.log(data)
         setSmoothies(data)
         setFetchError(null)
       }
     }
 
-    fetchSmoothes()
+    fetchSmoothies()
   }, [])
 
   return (
