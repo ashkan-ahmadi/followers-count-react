@@ -117,3 +117,30 @@ form button {
   color: grey;
   pointer-events: none;
 }
+
+.alert {
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.alert-danger {
+  background: rgb(239, 211, 211);
+  color: rgb(203, 48, 48);
+  border: 1px solid rgb(237, 171, 171);
+
+  &:before {
+    content: '❌';
+    margin-right: 0.5rem;
+  }
+}
+
+.alert-info {
+  background: rgb(204, 204, 246);
+  color: rgb(37, 37, 213);
+  border: 1px solid rgb(147, 147, 233);
+  
+  &:before {
+    content: 'ℹ️';
+    margin-right: 0.5rem;
+  }
+}
