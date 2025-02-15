@@ -31,18 +31,21 @@ const Update = () => {
           console.error(error)
           throw new Error(error)
         }
-        if (data) {
-          console.log(data)
-          const { title, method, rating } = data || {}
 
-          setTitle(title)
-          setMethod(method)
-          setRating(rating)
+        if (!data) {
+          return
         }
+
+        console.log(data)
+
+        const { title, method, rating } = data || {}
+
+        setTitle(title)
+        setMethod(method)
+        setRating(rating)
       } catch (error) {
         console.error(error)
         // Specifying replace: true will cause the navigation to replace the current entry in the history stack instead of adding a new one.
-
         navigate('/', { replace: true })
       } finally {
         setIsLoading(false)
@@ -52,10 +55,12 @@ const Update = () => {
     fetchSmoothie()
   }, [id, navigate])
 
+  async function handleSubmit(e) {}
+
   return (
     <div className="page update">
-      <form>
-        {isLoading && <p>Loading information ... please wait!</p>}
+      <form onSubmit={handleSubmit}>
+        {isLoading && <p>Loading ... please wait!</p>}
 
         <label htmlFor="title">Title</label>
         <input
