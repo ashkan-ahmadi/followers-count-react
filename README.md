@@ -7,3 +7,5 @@
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+YouTube playlist: https://www.youtube.com/playlist?list=PL4cUxeGkcC9hUb6sHthUEwG7r9VDPBMKO
