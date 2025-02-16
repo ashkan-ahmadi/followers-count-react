@@ -4,9 +4,15 @@ import { showErrorToast, showSuccessToast } from '../utils/utils'
 
 export default function SmoothieCard(props) {
   const {
-    smoothie: { id, title, method, rating, created_on },
+    smoothie: { id, title, method, rating, created_at },
     onDelete,
   } = props
+
+  const created_at_formatted = new Date(created_at).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 
   async function handleDelete() {
     try {
@@ -42,7 +48,7 @@ export default function SmoothieCard(props) {
       <div className="card-body">
         <p className="card-subtitle">Rating: {rating}/10</p>
         <p>
-          Created on: <b>{created_on}</b>
+          Created on: <b>{created_at_formatted}</b>
         </p>
         <p className="card-text">{method.length > 200 ? `${method.substring(0, 200)}...` : method}</p>
       </div>
