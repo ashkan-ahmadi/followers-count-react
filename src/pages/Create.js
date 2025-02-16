@@ -51,7 +51,7 @@ const Create = () => {
 
       // const { id } = data || {}
 
-      showSuccessToast()
+      showSuccessToast('Created successfully')
 
       navigate('/')
     } catch (error) {
