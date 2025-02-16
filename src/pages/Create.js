@@ -69,7 +69,7 @@ const Create = () => {
       <h2>Create</h2>
 
       <form onSubmit={handleSubmit}>
-        {formError && <p className="alert alert-danger">{formError}</p>}
+        {formError && !isLoading && <p className="alert alert-danger">{formError}</p>}
         <label htmlFor="title">Title</label>
         <input
           type="text"
