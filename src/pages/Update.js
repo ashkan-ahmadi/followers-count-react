@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import supabase from '../config/supabaseConfig'
 import { useParams, useNavigate } from 'react-router-dom'
-import { sleep } from '../utils/utils'
+import { showErrorToast, showSuccessToast } from '../utils/utils'
 
 const Update = () => {
   // return all the params - built into RRD
@@ -28,7 +28,9 @@ const Update = () => {
 
         // eq stands for equals similar to "where('id', id)"
         // single means return as an object, not in an array which is default
-        const { data, error } = await supabase.from('smoothies').select().eq('id', id).single()
+        const response = await supabase.from('smoothies').select().eq('id', id).single()
+
+        const { data, error } = response || {}
 
         if (error) {
           console.error(error)
@@ -68,14 +70,12 @@ const Update = () => {
       setIsSuccess(false)
       setFormError(false)
 
-      // await sleep()
-
       if (!title || !method || !rating) {
         setFormError('Fill in all fields')
         return
       }
 
-      const { data, error } = await supabase
+      const response = await supabase
         .from('smoothies')
         .update({
           title: title,
@@ -85,9 +85,11 @@ const Update = () => {
         .eq('id', id)
         .select()
 
+      const { data, error } = response || {}
+
       if (error) {
         console.error(error)
-        setFormError('There was an error with updating. Please try again.')
+
         throw new Error(error)
       }
 
@@ -100,11 +102,12 @@ const Update = () => {
 
       setIsSuccess(true)
 
-      // it stops so the user can see the Success alert
-      await sleep()
+      showSuccessToast('Updated successfully')
 
       navigate('/')
     } catch (error) {
+      showErrorToast('There was an error. Please try again.')
+      setFormError('There was an error with updating. Please try again.')
       console.error(error)
     } finally {
       setIsLoading(false)
@@ -117,8 +120,6 @@ const Update = () => {
         {formError && !isLoading && !isSuccess && <p className="alert alert-danger">{formError}</p>}
 
         {isLoading && <p className="alert alert-info">Loading ... please wait!</p>}
-
-        {isSuccess && !isLoading && !formError && <p className="alert alert-success">Success</p>}
 
         <label htmlFor="title">Title</label>
         <input
