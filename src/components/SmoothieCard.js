@@ -4,11 +4,15 @@ import supabase from '../config/supabaseConfig'
 export default function SmoothieCard(props) {
   const {
     smoothie: { id, title, method, rating },
+    updateSmoothiesAfterDeletion,
   } = props
 
   async function handleDelete() {
     try {
+      // IMPORTANT: if you do not use .select(), data will return null
       const { data, error } = await supabase.from('smoothies').delete().eq('id', id).select()
+
+      console.log(data)
 
       if (error) {
         console.error(error)
@@ -16,9 +20,11 @@ export default function SmoothieCard(props) {
       }
 
       if (!data) {
+        // IMPORTANT: do not use this validation if you aren't using .select()
         return
       }
 
+      updateSmoothiesAfterDeletion(id)
       console.log(data)
     } catch (error) {
       console.error(error)
