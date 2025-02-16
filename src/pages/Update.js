@@ -23,7 +23,7 @@ const Update = () => {
     async function fetchSmoothie() {
       try {
         setIsLoading(true)
-        await sleep(4000)
+        // await sleep(4000)
 
         // eq stands for equals similar to "where('id', id)"
         // single means return as an object, not in an array which is default
@@ -64,7 +64,7 @@ const Update = () => {
       e.preventDefault()
 
       setIsLoading(true)
-      await sleep(4000)
+      // await sleep(4000)
 
       // just in case to ensure there is no alert or indication
       setIsSuccess(false)
