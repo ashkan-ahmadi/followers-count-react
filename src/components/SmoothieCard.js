@@ -37,16 +37,21 @@ export default function SmoothieCard(props) {
     }
   }
   return (
-    <div className="smoothie-card">
-      <h3>{title}</h3>
-      <p>{method.length > 200 ? `${method.substring(0, 200)}...` : method}</p>
-      <div className="rating">{rating}</div>
-      <Link to={`/${id}`}>
-        <i className="material-icons">edit</i>
-      </Link>
-      <i className="material-icons" onClick={handleDelete}>
-        delete
-      </i>
+    <div className="card">
+      <h3 className="card-header">{title}</h3>
+      <div className="card-body">
+        <p className="card-subtitle">Rating: {rating}/10</p>
+        <p className="card-text">{method.length > 200 ? `${method.substring(0, 200)}...` : method}</p>
+      </div>
+      <div className="card-footer">
+        {' '}
+        <Link to={`/${id}`} className="btn btn-light">
+          <i className="material-icons">edit</i>
+        </Link>
+        <button className="btn btn-light" onClick={handleDelete}>
+          <i className="material-icons">delete</i>
+        </button>
+      </div>
     </div>
   )
 }
