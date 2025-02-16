@@ -19,6 +19,7 @@ const Create = () => {
 
       setIsLoading(true)
       if (!title || !method || !rating) {
+        showErrorToast('You must fill in all required fields.')
         setFormError('Fill in all fields')
         return
       }
@@ -68,7 +69,7 @@ const Create = () => {
       <h2>Create</h2>
 
       <form onSubmit={handleSubmit}>
-        {formError && <p>{formError}</p>}
+        {formError && <p className="alert alert-danger">{formError}</p>}
         <label htmlFor="title">Title</label>
         <input
           type="text"
