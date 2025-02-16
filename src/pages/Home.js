@@ -1,7 +1,8 @@
-import SmoothieCard from '../components/SmoothieCard'
+import { useEffect, useState } from 'react'
 import supabase from '../config/supabaseConfig'
 
-import { useEffect, useState } from 'react'
+import OrderBySelect from '../components/OrderBySelect'
+import SmoothieCard from '../components/SmoothieCard'
 
 const Home = () => {
   const [fetchError, setFetchError] = useState(null)
@@ -36,28 +37,25 @@ const Home = () => {
   }, [orderBy])
 
   return (
-    <div className="page home">
-      <h2>Home</h2>
+    <main className="container py-5">
+      <h1>Home</h1>
 
       {fetchError && <p>{fetchError}</p>}
 
       {smoothies && (
-        <div className="smoothies">
-          <div className="order-by">
-            <p>Order by:</p>
-            <button onClick={() => setOrderBy('created_at')}>Time created</button>
-            <button onClick={() => setOrderBy('title')}>Title</button>
-            <button onClick={() => setOrderBy('rating')}>Rating</button>
-            {orderBy}
-          </div>
-          <div className="smoothie-grid">
+        <>
+          <OrderBySelect setOrderBy={setOrderBy} />
+          <h2 className="mb-4">Smoothies</h2>
+          <div className="row g-4">
             {smoothies.map(smoothie => (
-              <SmoothieCard key={smoothie?.id} smoothie={smoothie} onDelete={updateSmoothiesAfterDeletion} />
+              <div className="col-12 col-md-6 col-lg-4">
+                <SmoothieCard key={smoothie?.id} smoothie={smoothie} onDelete={updateSmoothiesAfterDeletion} />
+              </div>
             ))}
           </div>
-        </div>
+        </>
       )}
-    </div>
+    </main>
   )
 }
 
