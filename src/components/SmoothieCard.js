@@ -4,7 +4,7 @@ import { showErrorToast, showSuccessToast } from '../utils/utils'
 
 export default function SmoothieCard(props) {
   const {
-    smoothie: { id, title, method, rating },
+    smoothie: { id, title, method, rating, created_on },
     onDelete,
   } = props
 
@@ -41,15 +41,20 @@ export default function SmoothieCard(props) {
       <h3 className="card-header">{title}</h3>
       <div className="card-body">
         <p className="card-subtitle">Rating: {rating}/10</p>
+        <p>
+          Created on: <b>{created_on}</b>
+        </p>
         <p className="card-text">{method.length > 200 ? `${method.substring(0, 200)}...` : method}</p>
       </div>
       <div className="card-footer">
         {' '}
         <Link to={`/${id}`} className="btn btn-light">
-          <i className="material-icons">edit</i>
+          <i className="bi bi-pencil"></i>
+          <span className="visually-hidden">Edit</span>
         </Link>
         <button className="btn btn-light" onClick={handleDelete}>
-          <i className="material-icons">delete</i>
+          <i className="bi bi-trash3"></i>
+          <span className="visually-hidden">Edit</span>
         </button>
       </div>
     </div>
