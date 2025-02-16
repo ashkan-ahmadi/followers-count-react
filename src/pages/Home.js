@@ -7,6 +7,12 @@ const Home = () => {
   const [fetchError, setFetchError] = useState(null)
   const [smoothies, setSmoothies] = useState(null)
 
+  function updateSmoothiesAfterDeletion(id) {
+    setSmoothies(prev => {
+      return prev.filter(smoothie => smoothie.id !== id)
+    })
+  }
+
   useEffect(() => {
     async function fetchSmoothies() {
       // .select() means select all (like SELECT *)
@@ -38,7 +44,7 @@ const Home = () => {
         <div className="smoothies">
           <div className="smoothie-grid">
             {smoothies.map(smoothie => (
-              <SmoothieCard key={smoothie?.id} smoothie={smoothie} />
+              <SmoothieCard key={smoothie?.id} smoothie={smoothie} updateSmoothiesAfterDeletion={updateSmoothiesAfterDeletion} />
             ))}
           </div>
         </div>
