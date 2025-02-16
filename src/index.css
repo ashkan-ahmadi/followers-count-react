@@ -121,26 +121,38 @@ form button {
 .alert {
   padding: 1rem;
   border-radius: 8px;
-}
-
-.alert-danger {
-  background: rgb(239, 211, 211);
-  color: rgb(203, 48, 48);
-  border: 1px solid rgb(237, 171, 171);
 
   &:before {
-    content: '❌';
     margin-right: 0.5rem;
   }
 }
 
+.alert-danger {
+  background: hsl(0, 100%, 85%);
+  color: hsl(0, 100%, 65%);
+  border: 1px solid hsl(0, 100%, 75%);
+
+  &:before {
+    content: '❌';
+  }
+}
+
 .alert-info {
-  background: rgb(204, 204, 246);
-  color: rgb(37, 37, 213);
-  border: 1px solid rgb(147, 147, 233);
+  background: hsl(240, 100%, 85%);
+  color: hsl(240, 100%, 65%);
+  border: 1px solid hsl(240, 100%, 75%);
   
   &:before {
     content: 'ℹ️';
-    margin-right: 0.5rem;
+  }
+}
+
+.alert-success {
+  background: hsl(120, 100%, 85%);
+  color: hsl(120, 60%, 36%);
+  border: 1px solid hsl(120, 100%, 75%);
+  
+  &:before {
+    content: '✅';
   }
 }
