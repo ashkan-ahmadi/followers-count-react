@@ -39,7 +39,7 @@ export default function SmoothieCard(props) {
   return (
     <div className="smoothie-card">
       <h3>{title}</h3>
-      <p>{method}</p>
+      <p>{method.length > 200 ? `${method.substring(0, 200)}...` : method}</p>
       <div className="rating">{rating}</div>
       <Link to={`/${id}`}>
         <i className="material-icons">edit</i>
