@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import supabase from '../config/supabaseConfig'
 import { useParams, useNavigate } from 'react-router-dom'
-import { showErrorToast, showSuccessToast } from '../utils/utils'
+import { showErrorToast, showSuccessToast, sleep } from '../utils/utils'
 
 const Update = () => {
   // return all the params - built into RRD
@@ -23,8 +23,7 @@ const Update = () => {
     async function fetchSmoothie() {
       try {
         setIsLoading(true)
-
-        // await new Promise(r => setTimeout(r, 2000))
+        await sleep(4000)
 
         // eq stands for equals similar to "where('id', id)"
         // single means return as an object, not in an array which is default
@@ -65,6 +64,7 @@ const Update = () => {
       e.preventDefault()
 
       setIsLoading(true)
+      await sleep(4000)
 
       // just in case to ensure there is no alert or indication
       setIsSuccess(false)
@@ -115,34 +115,49 @@ const Update = () => {
   }
 
   return (
-    <div className="page update">
-      <form onSubmit={handleSubmit}>
-        {formError && !isLoading && !isSuccess && <p className="alert alert-danger">{formError}</p>}
+    <main className="container py-5">
+      <form onSubmit={handleSubmit} className="row g-4">
+        {/* {formError && !isLoading && !isSuccess && <p className="alert alert-danger">{formError}</p>} */}
 
         {isLoading && <p className="alert alert-info">Loading ... please wait!</p>}
 
-        <label htmlFor="title">Title</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value={title}
-          disabled={isLoading}
-          placeholder=""
-          onChange={e => {
-            setTitle(e.target.value)
-          }}
-        />
+        <div className="col-12">
+          <label htmlFor="title" className="form-label">
+            Title
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="title"
+            name="title"
+            value={title}
+            disabled={isLoading}
+            placeholder=""
+            onChange={e => {
+              setTitle(e.target.value)
+            }}
+          />
+        </div>
 
-        <label htmlFor="method">Method</label>
-        <textarea name="method" id="method" value={method} disabled={isLoading} onChange={e => setMethod(e.target.value)}></textarea>
-
-        <label htmlFor="rating">Rating (0 to 10)</label>
-        <input type="number" id="rating" name="rating" min="0" max="10" step="1" value={rating} disabled={isLoading} onChange={e => setRating(e.target.value)} />
-
-        <button disabled={isLoading}>Update</button>
+        <div className="col-12">
+          <label htmlFor="method" className="form-label">
+            Method
+          </label>
+          <textarea className="form-control" name="method" id="method" value={method} disabled={isLoading} onChange={e => setMethod(e.target.value)}></textarea>
+        </div>
+        <div className="col-12">
+          <label htmlFor="rating" className="form-label">
+            Rating (0 to 10)
+          </label>
+          <input type="number" className="form-control" id="rating" name="rating" min="0" max="10" step="1" value={rating} disabled={isLoading} onChange={e => setRating(e.target.value)} />
+        </div>
+        <div className="col-12">
+          <button disabled={isLoading} className="btn btn-primary">
+            Update
+          </button>
+        </div>
       </form>
-    </div>
+    </main>
   )
 }
 
