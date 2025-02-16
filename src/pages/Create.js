@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import supabase from '../config/supabaseConfig'
 import { useNavigate } from 'react-router-dom'
+import { showSuccessToast } from '../utils/utils'
 
 const Create = () => {
   // https://reactrouter.com/6.29.0/hooks/use-navigate
@@ -22,7 +23,7 @@ const Create = () => {
         return
       }
 
-      const { data, error } = await supabase
+      const response = await supabase
         .from('smoothies')
         .insert([
           {
@@ -32,6 +33,10 @@ const Create = () => {
           },
         ])
         .select()
+
+      const { data, error } = response || {}
+
+      console.log(response)
 
       if (error) {
         console.error(error)
@@ -44,13 +49,15 @@ const Create = () => {
 
       console.log(data)
 
-      const { id } = data || {}
+      // const { id } = data || {}
+
+      showSuccessToast()
 
       navigate('/')
     } catch (error) {
       console.error(error)
     } finally {
-      setIsLoading(true)
+      setIsLoading(false)
     }
   }
 
