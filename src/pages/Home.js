@@ -10,7 +10,8 @@ const Home = () => {
   useEffect(() => {
     async function fetchSmoothies() {
       // .select() means select all (like SELECT *)
-      const { data, error } = await supabase.from('smoothies').select()
+      // ascending false means bigger id comes before the smaller id (newer row first)
+      const { data, error } = await supabase.from('smoothies').select().order('id', { ascending: false })
 
       if (error) {
         setFetchError('Could not fetch smoothies')
