@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import supabase from '../config/supabaseConfig'
+import { showErrorToast, showSuccessToast } from '../utils/utils'
 
 export default function SmoothieCard(props) {
   const {
@@ -10,13 +11,15 @@ export default function SmoothieCard(props) {
   async function handleDelete() {
     try {
       // IMPORTANT: if you do not use .select(), data will return null
-      const { data, error } = await supabase.from('smoothies').delete().eq('id', id).select()
+      const response = await supabase.from('smoothies').delete().eq('id', id).select()
 
-      console.log(data)
+      const { data, error } = response || {}
+
+      console.log(response)
 
       if (error) {
         console.error(error)
-        throw new Error(error)
+        throw new Error(error?.message)
       }
 
       if (!data) {
@@ -24,9 +27,12 @@ export default function SmoothieCard(props) {
         return
       }
 
+      showSuccessToast('Deleted successfully')
+
+      // update the UI
       updateSmoothiesAfterDeletion(id)
-      console.log(data)
     } catch (error) {
+      showErrorToast('There was an error. Please try again.')
       console.error(error)
     }
   }
