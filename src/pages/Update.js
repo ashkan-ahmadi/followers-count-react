@@ -100,6 +100,7 @@ const Update = () => {
 
       setIsSuccess(true)
 
+      // it stops so the user can see the Success alert
       await sleep()
 
       navigate('/')
