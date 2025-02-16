@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import supabase from '../config/supabaseConfig'
 import { useNavigate } from 'react-router-dom'
-import { showSuccessToast } from '../utils/utils'
+import { showErrorToast, showSuccessToast } from '../utils/utils'
 
 const Create = () => {
   // https://reactrouter.com/6.29.0/hooks/use-navigate
@@ -55,6 +55,8 @@ const Create = () => {
 
       navigate('/')
     } catch (error) {
+      showErrorToast('There was an error. Please try again.')
+      setFormError('There was an error with updating. Please try again.')
       console.error(error)
     } finally {
       setIsLoading(false)
