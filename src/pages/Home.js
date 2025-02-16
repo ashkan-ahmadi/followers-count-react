@@ -44,7 +44,7 @@ const Home = () => {
         <div className="smoothies">
           <div className="smoothie-grid">
             {smoothies.map(smoothie => (
-              <SmoothieCard key={smoothie?.id} smoothie={smoothie} updateSmoothiesAfterDeletion={updateSmoothiesAfterDeletion} />
+              <SmoothieCard key={smoothie?.id} smoothie={smoothie} onDelete={updateSmoothiesAfterDeletion} />
             ))}
           </div>
         </div>

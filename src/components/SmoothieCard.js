@@ -5,7 +5,7 @@ import { showErrorToast, showSuccessToast } from '../utils/utils'
 export default function SmoothieCard(props) {
   const {
     smoothie: { id, title, method, rating },
-    updateSmoothiesAfterDeletion,
+    onDelete,
   } = props
 
   async function handleDelete() {
@@ -29,8 +29,8 @@ export default function SmoothieCard(props) {
 
       showSuccessToast('Deleted successfully')
 
-      // update the UI
-      updateSmoothiesAfterDeletion(id)
+      // update the UI (onDelete calls the function updateSmoothiesAfterDeletion)
+      onDelete(id)
     } catch (error) {
       showErrorToast('There was an error. Please try again.')
       console.error(error)
