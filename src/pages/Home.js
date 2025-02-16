@@ -48,8 +48,8 @@ const Home = () => {
           <h2 className="mb-4">Smoothies</h2>
           <div className="row g-4">
             {smoothies.map(smoothie => (
-              <div className="col-12 col-md-6 col-lg-4">
-                <SmoothieCard key={smoothie?.id} smoothie={smoothie} onDelete={updateSmoothiesAfterDeletion} />
+              <div className="col-12 col-md-6 col-lg-4" key={smoothie?.id}>
+                <SmoothieCard smoothie={smoothie} orderBy={orderBy} onDelete={updateSmoothiesAfterDeletion} />
               </div>
             ))}
           </div>
