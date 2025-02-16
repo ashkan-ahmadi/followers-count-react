@@ -4,7 +4,10 @@ export default function Header() {
     <header className="container-fluid py-4 bg-light ">
       <div className="container">
         <nav className="navbar text-center">
-          <a className="navbar-brand">Supabase Smoothies</a>
+          <Link to="/" className="navbar-brand">
+            Supabase Smoothies
+          </Link>
+
           <div>
             <Link to="/">Home</Link>
             <Link to="/create" className="btn btn-primary">
