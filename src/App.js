@@ -1,10 +1,12 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+// components
+import Header from './components/Header'
 
 // pages
 import Home from './pages/Home'
 import Create from './pages/Create'
 import Update from './pages/Update'
-import Header from './components/Header'
 
 function App() {
   return (
