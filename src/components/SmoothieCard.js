@@ -54,7 +54,7 @@ export default function SmoothieCard(props) {
       </div>
       <div className="card-footer">
         {' '}
-        <Link to={`/${id}`} className="btn btn-light">
+        <Link to={`/edit/${id}`} className="btn btn-light">
           <i className="bi bi-pencil"></i>
           <span className="visually-hidden">Edit</span>
         </Link>
