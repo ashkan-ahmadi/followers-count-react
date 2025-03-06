@@ -1,61 +1,102 @@
 import { useEffect, useState } from 'react'
-import supabase from '../config/supabaseConfig'
-
-import OrderBySelect from '../components/OrderBySelect'
-import SmoothieCard from '../components/SmoothieCard'
+import MetricBox from '../components/MetricBox'
+import MetricBoxDisabled from '../components/MetricBoxDisabled'
 
 const Home = () => {
-  const [fetchError, setFetchError] = useState(null)
-  const [smoothies, setSmoothies] = useState(null)
-  const [orderBy, setOrderBy] = useState('created_at') // created_at is the column name
+  const [instagramCount, setInstagramCount] = useState(0)
+  const [tikTokCount, setTikTokCount] = useState(0)
+  const [isLoading, setIsLoading] = useState()
 
-  function updateSmoothiesAfterDeletion(id) {
-    setSmoothies(prev => {
-      return prev.filter(smoothie => smoothie.id !== id)
-    })
-  }
+  // prettier-ignore
+  const urls = [
+    // 'https://cors-anywhere.herokuapp.com/https://csrng.net/csrng/csrng.php?min=100&max=30000',
+    // 'https://cors-anywhere.herokuapp.com/https://csrng.net/csrng/csrng.php?min=100&max=30000',
+    // 'https://cors-anywhere.herokuapp.com/https://csrng.net/csrng/csrng.php',
+    // 'https://cors-anywhere.herokuapp.com/https://csrng.net/csrng/csrng.php',
+    // 'https://cors-anywhere.herokuapp.com/https://csrng.net/csrng/csrng.php',
+  ]
 
   useEffect(() => {
-    async function fetchSmoothies() {
-      // .select() means select all (like SELECT *)
-      // ascending false means bigger id comes before the smaller id (newer row first)
-      const { data, error } = await supabase.from('smoothies').select().order(orderBy, { ascending: false })
+    const fetchData = async () => {
+      try {
+        setIsLoading(true)
+        const requests = urls.map(url =>
+          fetch(url, {
+            headers: {
+              'X-Requested-With': 'Foo',
+            },
+          })
+            .then(response => response.json())
+            .catch(error => console.error(`Error fetching ${url}:`, error))
+        )
 
-      if (error) {
-        setFetchError('Could not fetch smoothies')
-        setSmoothies(null)
-        console.log(error)
-      }
+        // there is an issue with too many requests. will probably have to set up custom api myself
 
-      if (data) {
-        setSmoothies(data)
-        setFetchError(null)
+        Promise.allSettled(requests).then(results => {
+          results.forEach((result, index) => {
+            // console.log(result.value)
+            if (result.status === 'fulfilled') {
+              // console.log(result)
+              const randomNumber = result?.value[0]?.random
+              if (index === 0) setInstagramCount(randomNumber)
+              if (index === 1) setTikTokCount(randomNumber)
+            }
+          })
+        })
+      } catch (error) {
+        // console.error('Error fetching data:', error)
+      } finally {
+        setIsLoading(false)
       }
     }
 
-    fetchSmoothies()
-  }, [orderBy])
+    // fetchData() // Fetch immediately
+
+    // const interval = setInterval(fetchData, 3000)
+
+    // return () => clearInterval(interval) // Cleanup on unmount
+  }, [])
+
+  useEffect(() => {
+    async function fetchD() {
+      try {
+        setIsLoading(true)
+
+        setInstagramCount(prev => prev + 32353)
+        setTikTokCount(prev => prev + 455)
+      } catch (error) {
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    // fetchD() // Fetch immediately
+
+    const interval = setInterval(fetchD, 2000)
+  }, [])
+
+  // temp
+  // if (isLoading) {
+  //   return 'loading...'
+  // }
 
   return (
-    <main className="container py-5">
-      <h1>Home</h1>
-
-      {fetchError && <p>{fetchError}</p>}
-
-      {smoothies && (
-        <>
-          <OrderBySelect setOrderBy={setOrderBy} />
-          <h2 className="mb-4">Smoothies</h2>
-          <div className="row g-4">
-            {smoothies.map(smoothie => (
-              <div className="col-12 col-md-6 col-lg-4" key={smoothie?.id}>
-                <SmoothieCard smoothie={smoothie} orderBy={orderBy} onDelete={updateSmoothiesAfterDeletion} />
-              </div>
-            ))}
+    <>
+      <main className="bg-body-tertiary vh-100" data-bs-theme="dark">
+        <section className="container py-4">
+          <h1 className="text-light mb-4">Stats</h1>
+          <p className="m-0 text-light opacity-50 mb-4">The metrics are updated every 1 hour. Next update will be in 43 minutes.</p>
+          <div className="row g-4 mb-4">
+            <div className="col-12 col-md-6 col-xxl-4">
+              <MetricBox heading="@instagram" metric={instagramCount} iconClassName="instagram" isLoading={isLoading} />
+            </div>
+            <div className="col-12 col-md-6 col-xxl-4">
+              <MetricBox heading="@tiktok" metric={tikTokCount} iconClassName="tiktok" isLoading={isLoading} />
+            </div>
           </div>
-        </>
-      )}
-    </main>
+        </section>
+      </main>
+    </>
   )
 }
 
