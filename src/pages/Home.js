@@ -75,11 +75,6 @@ const Home = () => {
     const interval = setInterval(fetchD, 2000)
   }, [])
 
-  // temp
-  // if (isLoading) {
-  //   return 'loading...'
-  // }
-
   return (
     <>
       <main className="bg-body-tertiary vh-100" data-bs-theme="dark">
