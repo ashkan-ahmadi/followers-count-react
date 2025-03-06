@@ -62,3 +62,7 @@ export function showWarningToast(text = 'Warning', options = {}) {
     ...options,
   })
 }
+
+export function getRandomNumber(min, max) {
+  return Math.random() * (max - min) + min
+}
