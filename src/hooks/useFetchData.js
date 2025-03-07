@@ -2,38 +2,28 @@ import { useEffect, useState } from 'react'
 import { getRandomNumber, sleep } from '../utils/utils'
 
 export default function useFetchData() {
-  const [number, setNumber] = useState(null)
+  const [currentValue, setCurrentValue] = useState(null)
+  const [previousValue, setPreviousValue] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  // const URL = 'http://studentfy.local/wp-json/sf/v1/forms/contact'
-
-  async function fetchNumber() {
+  async function fetchValue() {
     try {
       setLoading(true)
 
       // simulating slow API response to see the loading spinner
-      await sleep()
+      await sleep(500)
 
-      const randomNumber = getRandomNumber(2322, 988478)
+      // FIXME: not sure why this part doesn't run
+      // number always returns null even on the re-renders
+      if (currentValue) {
+        setPreviousValue(currentValue)
+      }
 
-      setNumber(randomNumber)
-
+      // Fetch a random number
       // NOT USING FETCH TO AVOID CORS FOR NOW
-
-      // const req = await fetch(URL, {
-      //   method: 'GET',
-      //   credentials: 'include', // or "same-origin" if both are on the same domain
-      // })
-      // const res = await req.json()
-
-      // console.log(res)
-
-      // if (!res?.success) {
-      //   throw new Error('Unsuccessful fetch')
-      // }
-
-      // setNumber(res?.data?.value)
+      const randomNumber = getRandomNumber(2322, 988478)
+      setCurrentValue(randomNumber)
     } catch (error) {
       console.log(error)
       setError(error)
@@ -42,11 +32,15 @@ export default function useFetchData() {
     }
   }
 
+  // fetch number on the very first use of the hook
+  // subsequent fetches are handled by the useEffect below through setInterval
   useEffect(() => {
-    fetchNumber()
-    const interval = setInterval(fetchNumber, 1000 * 60 * 60) // Refresh every 60 minutes
+    fetchValue()
+
+    // fetch number on the very first use of the hook
+    const interval = setInterval(fetchValue, 2000) // Refresh at an interval
     return () => clearInterval(interval)
   }, [])
 
-  return { number, loading, error }
+  return { currentValue, previousValue, loading, error }
 }
