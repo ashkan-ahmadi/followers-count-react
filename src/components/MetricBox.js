@@ -15,16 +15,16 @@ export default function MetricBox(props) {
   const metric = formatter.format(number)
 
   return (
-    <div className="card border-0">
+    <div className="card border-0 shadow-sm">
       <div className="card-body">
         <div className="row align-items-center">
           <div className="col">
-            <h2 className="card-title">{heading}</h2>
+            <h2 className="h6 fw-normal">{heading}</h2>
 
-            <p className="card-text fs-1 font-monospace fw-semibold">{loading ? <Spinner /> : metric}</p>
+            <p className="card-text fs-4 fw-semibold">{loading ? <Spinner /> : metric}</p>
           </div>
           <div className="col-auto">
-            <i className={`fs-1 bi bi-${icon}`}></i>
+            <i className={`fs-5 bi bi-${icon}`}></i>
           </div>
         </div>
       </div>
