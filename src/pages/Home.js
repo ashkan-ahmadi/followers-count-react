@@ -6,6 +6,11 @@ const Home = () => {
     { id: 1, heading: '@instagram', icon: 'instagram' },
     { id: 2, heading: '@tiktok', icon: 'tiktok' },
     { id: 3, heading: '@twitter', icon: 'twitter' },
+    { id: 4, heading: '@youtube', icon: 'youtube' },
+    { id: 5, heading: '@github', icon: 'github' },
+    { id: 6, heading: '@linkedin', icon: 'linkedin' },
+    { id: 7, heading: '@reddit', icon: 'reddit' },
+    { id: 8, heading: '@threads', icon: 'threads' },
   ]
 
   return (
