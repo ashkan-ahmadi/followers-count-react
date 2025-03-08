@@ -23,10 +23,10 @@ export default function MetricCard(props) {
   // const changeNumber = currentValue - previousValue
 
   return (
-    <div className="card border-0 shadow-sm position-relative">
+    <div className="card border-0 shadow-sm position-relative h-100">
       <div className="card-body">
         <i className={`bi bi-${icon} align-items-center bg-light d-inline-flex feature-icon fs-5 justify-content-center mb-3 rounded-5`} style={{ width: '3rem', height: '3rem' }} aria-hidden="true"></i>
-        <h2 className="h6 fw-light mb-3">{heading}</h2>
+        <h2 className="h6 fw-light mb-0">{heading}</h2>
         <p className={`card-text fs-4 fw-semibold mb-0 ${loading ? 'placeholder-glow' : ''}`}>{loading ? <span className="placeholder col-5"></span> : numberFormatter.format(currentValue)}</p>
         {/* TODO: why doesnt it work? figure out the dependency array on useFetchData */}
 
