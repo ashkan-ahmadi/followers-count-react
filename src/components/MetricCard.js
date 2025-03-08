@@ -11,6 +11,7 @@ export default function MetricCard(props) {
   const numberFormatter = formatNumber(undefined, {})
   const numberFormatterAsPercent = formatNumber(undefined, {
     style: 'percent',
+    maximumFractionDigits: 2,
   })
 
   const changePercent = (currentValue - previousValue) / previousValue
@@ -24,32 +25,28 @@ export default function MetricCard(props) {
   return (
     <div className="card border-0 shadow-sm position-relative">
       <div className="card-body">
-        <div className="row align-items-center">
-          <div className="col">
-            <h2 className="h6 fw-light">{heading}</h2>
-            <p className={`card-text fs-4 fw-semibold mb-0 ${loading ? 'placeholder-glow' : ''}`}>{loading ? <span className="placeholder col-5"></span> : numberFormatter.format(currentValue)}</p>
-            {/* TODO: why doesnt it work? figure out the dependency array on useFetchData */}
+        <i className={`bi bi-${icon} align-items-center bg-light d-inline-flex feature-icon fs-5 justify-content-center mb-3 rounded-5`} style={{ width: '3rem', height: '3rem' }} aria-hidden="true"></i>
+        <h2 className="h6 fw-light mb-3">{heading}</h2>
+        <p className={`card-text fs-4 fw-semibold mb-0 ${loading ? 'placeholder-glow' : ''}`}>{loading ? <span className="placeholder col-5"></span> : numberFormatter.format(currentValue)}</p>
+        {/* TODO: why doesnt it work? figure out the dependency array on useFetchData */}
 
-            {previousValue ? (
-              <>
-                {/* <i className={`bi ${iconClass} ${textColorClass} me-2`} aria-hidden="true"></i> */}
-                {/* {changeNumber} (previousValue: {numberFormatter.format(previousValue)}) {numberFormatterAsPercent.format(changePercent)} */}
-                <i className={`bi ${iconClass} ${textColorClass} me-2`} aria-hidden="true"></i>
-                {numberFormatterAsPercent.format(changePercent)} vs last update
-              </>
-            ) : (
-              ''
-            )}
-          </div>
-          <div className="col-auto">
-            <i className={`fs-5 bi bi-${icon}`} aria-hidden="true"></i>
-          </div>
-        </div>
-        <button className="position-absolute top-0 end-0 btn btn-link" onClick={() => fetchValue()}>
-          <i className="bi bi-arrow-clockwise"></i>
-          <span className="visually-hidden">Update now</span>
-        </button>
+        {previousValue ? (
+          <>
+            {/* <i className={`bi ${iconClass} ${textColorClass} me-2`} aria-hidden="true"></i> */}
+            {/* {changeNumber} (previousValue: {numberFormatter.format(previousValue)}) {numberFormatterAsPercent.format(changePercent)} */}
+            <p className="small m-0">
+              <i className={`bi ${iconClass} ${textColorClass} me-2`} aria-hidden="true"></i>
+              <span className={`${textColorClass}`}>{numberFormatterAsPercent.format(changePercent)}</span> <span className="text-muted">vs last update</span>
+            </p>
+          </>
+        ) : (
+          ''
+        )}
       </div>
+      <button className="position-absolute top-0 end-0 btn btn-link" onClick={() => fetchValue()}>
+        <i className="bi bi-arrow-clockwise"></i>
+        <span className="visually-hidden">Update now</span>
+      </button>
     </div>
   )
 }
