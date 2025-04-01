@@ -16,7 +16,7 @@ export default function useFetchData(autoFetch = 0) {
 
       // Fetch a random number
       // NOT USING FETCH TO AVOID CORS FOR NOW
-      const randomNumber = getRandomNumber(1, 100)
+      const randomNumber = getRandomNumber(193823, 232323232)
 
       // we do it this way so the interval works
       // Doing this below does NOT work for the interval
