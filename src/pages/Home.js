@@ -1,4 +1,5 @@
 import MetricCard from '../components/MetricCard'
+import { AUTO_REFRESH } from '../constants'
 
 const Home = () => {
   // ids are fake values
@@ -18,7 +19,9 @@ const Home = () => {
       <main className="bg-body-tertiary vh-100 bg-light">
         <section className="container py-4">
           <h1 className="mb-4">Followers</h1>
-          <p className="text-muted mb-4">The metrics auto-update every 60 minutes.</p>
+
+          {AUTO_REFRESH ? <p className="text-muted mb-4">The metrics auto-update every {AUTO_REFRESH / 1000} seconds.</p> : null}
+
           <div className="row g-4">
             {cards.length ? (
               cards.map(card => (
