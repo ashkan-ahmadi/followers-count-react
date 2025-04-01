@@ -1,3 +1,4 @@
+import { AUTO_REFRESH } from '../constants'
 import useFetchData from '../hooks/useFetchData'
 import { formatNumber, HOUR_IN_MILLISECONDS, SECOND_IN_MILLISECONDS } from '../utils/utils'
 import Icon from './Icon'
@@ -8,7 +9,7 @@ export default function MetricCard(props) {
   const { heading, icon } = props || {}
 
   // by default useFetchData does NOT auto-update. Pass an optional interval time to enable and set interval rate
-  const { currentValue, previousValue, loading, fetchValue } = useFetchData(SECOND_IN_MILLISECONDS * 10)
+  const { currentValue, previousValue, loading, fetchValue } = useFetchData(AUTO_REFRESH)
 
   // defaults to user's locale
   const numberFormatter = formatNumber(undefined, {})
