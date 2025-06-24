@@ -1,6 +1,6 @@
 import { AUTO_REFRESH } from '../constants'
 import useFetchData from '../hooks/useFetchData'
-import { formatNumber, HOUR_IN_MILLISECONDS, SECOND_IN_MILLISECONDS } from '../utils/utils'
+import { formatNumber } from '../utils/utils'
 import Icon from './Icon'
 import PreviousValueLine from './PreviousValueLine'
 import UpdateNowButton from './UpdateNowButton'
@@ -12,6 +12,7 @@ export default function MetricCard(props) {
   const { currentValue, previousValue, loading, fetchValue } = useFetchData(AUTO_REFRESH)
 
   // defaults to user's locale
+  // use Chrome > Sensors > Location to override default locale
   const numberFormatter = formatNumber(undefined, {})
   const numberFormatterAsPercent = formatNumber(undefined, {
     style: 'percent',
