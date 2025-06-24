@@ -20,7 +20,20 @@ const Home = () => {
         <section className="container py-4">
           <h1 className="mb-4">Followers</h1>
 
-          {AUTO_REFRESH ? <p className="text-muted mb-4">The metrics auto-update every {AUTO_REFRESH / 1000} seconds.</p> : null}
+          {AUTO_REFRESH ? (
+            <p className="text-muted mb-4">
+              The metrics auto-update every <b>{AUTO_REFRESH / 1000} seconds</b>.
+            </p>
+          ) : null}
+
+          <div class="alert alert-primary d-flex gap-2 align-items-center mb-4">
+            <div>
+              <i class="bi bi-info-circle-fill"></i>
+            </div>
+            <p className="mb-0">
+              You can use the <code>Chrome DevTools &gt; Sensors &gt; Location</code> to override the locale and modify the number formatting.
+            </p>
+          </div>
 
           {cards?.length ? (
             <div className="row g-4">
