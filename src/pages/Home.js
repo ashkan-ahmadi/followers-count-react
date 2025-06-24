@@ -22,17 +22,17 @@ const Home = () => {
 
           {AUTO_REFRESH ? <p className="text-muted mb-4">The metrics auto-update every {AUTO_REFRESH / 1000} seconds.</p> : null}
 
-          <div className="row g-4">
-            {cards.length ? (
-              cards.map(card => (
-                <div className="col-12 col-md-6 col-xl-4 col-xxl-3 " key={card.id}>
+          {cards?.length ? (
+            <div className="row g-4">
+              {cards.map(card => (
+                <div className="col-12 col-sm-6 col-md-4 col-xl-3 " key={card.id}>
                   <MetricCard heading={card?.heading} icon={card?.icon} />
                 </div>
-              ))
-            ) : (
-              <div className="alert alert-warning">No cards found</div>
-            )}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="alert alert-warning">No cards found</div>
+          )}
         </section>
       </main>
     </>
