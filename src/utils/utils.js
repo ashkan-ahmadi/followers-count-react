@@ -74,6 +74,8 @@ export function getRandomNumber(min, max) {
  * However, there's a special behavior when it's called without new and the this value is another Intl.NumberFormat instance;
  * see Return value: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#return_value
  *
+ * Use Chrome DevTools > Sensors > Location to change the locale
+ *
  * @param {string} locale - A string with a BCP 47 language tag or an Intl.Locale instance, or an array of such locale identifiers. The runtime's default locale is used when undefined is passed or when none of the specified locale identifiers is supported.
  * @param {object} [options={}] - An object. For ease of reading, the property list is broken into sections based on their purposes, including locale options, style options, digit options, and other options.
  *
