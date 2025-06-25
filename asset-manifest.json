@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/followers-count-react/static/css/main.49faa5e3.css",
+    "main.js": "/followers-count-react/static/js/main.fbfd4992.js",
+    "index.html": "/followers-count-react/index.html",
+    "main.49faa5e3.css.map": "/followers-count-react/static/css/main.49faa5e3.css.map",
+    "main.fbfd4992.js.map": "/followers-count-react/static/js/main.fbfd4992.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.49faa5e3.css",
+    "static/js/main.fbfd4992.js"
+  ]
+}
