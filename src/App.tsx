@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Cards from './components/Cards'
 import Header from './components/Header'
-import AutoRefresh from './components/Auto'
+import AutoRefresh from './components/auto-refresh/AutoRefresh'
 import { CardsData } from './types/types'
 
 export default function Home() {

@@ -1,4 +1,4 @@
-import Switch from './auto-refresh/Switch'
+import Switch from './Switch'
 
 type Props = {
   shouldAutoRefresh: boolean
