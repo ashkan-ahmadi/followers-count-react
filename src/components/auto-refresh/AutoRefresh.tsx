@@ -9,15 +9,25 @@ type Props = {
 }
 
 export default function AutoRefresh({ shouldAutoRefresh, setShouldAutoRefresh, refreshRate, setRefreshRate }: Props) {
-  const [timeLeftToAutoRefresh, setTimeLeftToAutoRefresh] = useState<number>(refreshRate)
-  // console.log(refreshRate)
+  const [secondsLeft, setSecondsLeft] = useState(refreshRate)
 
   useEffect(() => {
-    const timeNow = Date.now()
-    const timeToRefresh = timeNow + refreshRate
+    // Skip running a timer when auto-refresh is off.
+    if (!shouldAutoRefresh) return
 
-    setTimeLeftToAutoRefresh(timeToRefresh + timeNow)
+    // Full bar again whenever the user turns auto-refresh on or changes the interval length.
+    setSecondsLeft(refreshRate)
+
+    const id = window.setInterval(() => {
+      // Drive the progress bar: 100% → 0% over refreshRate seconds, then start the next cycle.
+      setSecondsLeft(prev => (prev <= 1 ? refreshRate : prev - 1))
+    }, 1000)
+
+    return () => clearInterval(id)
   }, [refreshRate, shouldAutoRefresh])
+
+  const progressPercent = refreshRate > 0 ? Math.min(100, Math.max(0, (secondsLeft / refreshRate) * 100)) : 0
+
   return (
     <div className="alert alert-info">
       <div className="d-flex justify-content-between align-items-center">
@@ -25,9 +35,9 @@ export default function AutoRefresh({ shouldAutoRefresh, setShouldAutoRefresh, r
           <p className="m-0 fw-bold">Auto refresh?</p>
 
           {shouldAutoRefresh && (
-            <div className="progress mt-2" role="progressbar" aria-label="Example with label" aria-valuenow={25} aria-valuemin={0} aria-valuemax={100} style={{ width: '100%', maxWidth: '300px' }}>
-              <div className="progress-bar" style={{ width: `${refreshRate}%` }}>
-                {timeLeftToAutoRefresh}
+            <div className="progress mt-2" role="progressbar" aria-label="Seconds until next auto refresh" aria-valuenow={Math.round(progressPercent)} aria-valuemin={0} aria-valuemax={100} style={{ width: '100%', maxWidth: '300px' }}>
+              <div className="progress-bar" style={{ width: `${progressPercent}%` }}>
+                {secondsLeft}s left
               </div>
             </div>
           )}
