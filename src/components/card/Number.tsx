@@ -6,5 +6,5 @@ type Props = {
 }
 
 export default function Number({ value, className }: Props) {
-  return <NumberFlow value={value} className={className} />
+  return <NumberFlow value={value} className={className} style={{ 'font-variant': 'tabular-nums' }} />
 }
