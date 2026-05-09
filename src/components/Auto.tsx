@@ -11,9 +11,7 @@ export default function AutoRefresh({ shouldAutoRefresh, setShouldAutoRefresh, r
   return (
     <div className="alert alert-info">
       <div className="d-flex justify-content-between align-items-center">
-        <div className="">
-          <p className="m-0 fw-bold">Auto refresh?</p>
-        </div>
+        <p className="m-0 fw-bold">Auto refresh?</p>
         <div className="d-flex justify-content-between align-items-center gap-3">
           {shouldAutoRefresh && (
             <div className="input-group">
