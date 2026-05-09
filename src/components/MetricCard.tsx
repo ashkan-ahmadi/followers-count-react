@@ -7,7 +7,6 @@ import UpdateNowButton from './UpdateNowButton'
 export default function MetricCard(props) {
   const { heading, icon, shouldAutoRefresh, refreshRate } = props || {}
 
-  // by default useFetchData does NOT auto-update. Pass an optional interval time to enable and set interval rate
   const { currentValue, previousValue, isLoading, fetchValue } = useFetchData(shouldAutoRefresh, refreshRate)
 
   // defaults to user's locale
