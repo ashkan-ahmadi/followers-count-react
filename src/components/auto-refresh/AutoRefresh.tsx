@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import Switch from './Switch'
 
 type Props = {
@@ -8,10 +9,30 @@ type Props = {
 }
 
 export default function AutoRefresh({ shouldAutoRefresh, setShouldAutoRefresh, refreshRate, setRefreshRate }: Props) {
+  const [timeLeftToAutoRefresh, setTimeLeftToAutoRefresh] = useState<number>(refreshRate)
+  // console.log(refreshRate)
+
+  useEffect(() => {
+    const timeNow = Date.now()
+    const timeToRefresh = timeNow + refreshRate
+
+    setTimeLeftToAutoRefresh(timeToRefresh + timeNow)
+  }, [refreshRate, shouldAutoRefresh])
   return (
     <div className="alert alert-info">
       <div className="d-flex justify-content-between align-items-center">
-        <p className="m-0 fw-bold">Auto refresh?</p>
+        <div className="w-50">
+          <p className="m-0 fw-bold">Auto refresh?</p>
+
+          {shouldAutoRefresh && (
+            <div className="progress mt-2" role="progressbar" aria-label="Example with label" aria-valuenow={25} aria-valuemin={0} aria-valuemax={100} style={{ width: '100%', maxWidth: '300px' }}>
+              <div className="progress-bar" style={{ width: `${refreshRate}%` }}>
+                {timeLeftToAutoRefresh}
+              </div>
+            </div>
+          )}
+        </div>
+
         <div className="d-flex justify-content-between align-items-center gap-3">
           {shouldAutoRefresh && (
             <div className="input-group">
