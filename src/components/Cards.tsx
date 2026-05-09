@@ -1,5 +1,5 @@
 import { CardsData } from '../types/types'
-import MetricCard from './MetricCard'
+import MetricCard from './card/MetricCard'
 
 type Props = {
   cards: CardsData
